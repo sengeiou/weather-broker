@@ -6,7 +6,7 @@
 <body>
 <h1>Погодный брокер</h1>
 <h2>Введите название города</h2>
-<form action="index" method="get" modelAttribute="city">
+<form action="add" method="get" modelAttribute="city">
     <input type="text" name="city">
     <input type="submit">
 </form>

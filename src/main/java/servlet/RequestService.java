@@ -1,5 +1,5 @@
 package servlet;
 
 public interface RequestService {
-    void sendMessage(String txt);
+    String sendMessage(String txt);
 }
