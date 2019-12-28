@@ -22,9 +22,9 @@ public class AddServlet extends HttpServlet {
         LOG.info("IN GET");
         request.getRequestDispatcher("index.jsf").forward(request, response);
         //Получение параметра из поля на странице запроса.
-        //String city = request.getParameter("city");
+        String city = request.getParameter("city");
         try {
-            String result = requestService.sendMessage("city");
+            String result = requestService.sendMessage(city);
             response.getWriter().println("OK. SERVICE IS NULL:" + (requestService == null) + "; SERVICE RESULT:" + result);
             LOG.info("dick");
 
