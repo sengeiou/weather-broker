@@ -1,9 +1,9 @@
 package service;
 
-import java.io.IOException;
+import repository.StoreData;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Resource;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.inject.Inject;
@@ -12,27 +12,27 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 
 @MessageDriven(activationConfig = {
-        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/queue/city"),
+        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/queue/weather"),
         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
         @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge") })
-public class CityReceiveService implements MessageListener {
-    private static final Logger LOG = Logger.getLogger(CityReceiveService.class.getName());
+public class ReceiveWeatherData implements MessageListener {
+    private static final Logger LOG = Logger.getLogger(ReceiveWeatherData.class.getName());
 
     // TODO что то не то с внедрением
-    private DataRequest dataRequest;
+    //private StoreData storeData;
 
-    public CityReceiveService(){}
+    public ReceiveWeatherData(){}
 
-    @Inject
-    public CityReceiveService(DataRequest dataRequest) {
-        this.dataRequest = dataRequest;
-    }
+//    @Inject
+//    public ReceiveWeatherData(StoreData dataRequest) {
+//        this.storeData = dataRequest;
+//    }
 
     public void onMessage(Message rcvMessage) {
         try {
             LOG.info("Message received: " + rcvMessage.getBody(String.class));
-            LOG.info(String.valueOf(dataRequest != null));
-            dataRequest.getData();
+            //LOG.info(String.valueOf(storeData != null));
+            //storeData.saveForecastInDatabase();
         } catch (JMSException ex) {
             LOG.log(Level.SEVERE, ex.getMessage(), ex);
         } catch (Exception ex) {

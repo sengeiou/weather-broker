@@ -1,4 +1,4 @@
-package servlet;
+package service;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
@@ -9,8 +9,8 @@ import javax.jms.Queue;
 import java.util.logging.Logger;
 
 @RequestScoped
-public class RequestServiceImpl implements RequestService {
-    private final Logger LOG = Logger.getLogger(RequestServiceImpl.class.getName());
+public class SendCityName implements SendMessage {
+    private final Logger LOG = Logger.getLogger(SendCityName.class.getName());
 
     @Resource(mappedName = "java:/jms/queue/city")
     private Queue queue;

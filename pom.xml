@@ -28,6 +28,7 @@
     <modules>
         <module>admin_ui</module>
         <module>load_weather_service</module>
+        <module>weather-data-service</module>
     </modules>
 
     <!--  При переопределении scope лучше писать комментарий, для чего это сделано  -->

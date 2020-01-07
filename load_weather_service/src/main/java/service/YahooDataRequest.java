@@ -11,6 +11,7 @@ import org.apache.http.util.EntityUtils;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -19,11 +20,21 @@ public class YahooDataRequest implements DataRequest {
 
     private static final Logger LOG = Logger.getLogger(YahooDataRequest.class.getName());
 
+    @Inject
+    private SendMessage sendMessage;
+
+    /**
+     * Получение данных с Yahoo.
+     * Пока что выводит полученные данные в лог.
+     * @throws ClientProtocolException
+     * @throws IOException
+     */
     @Override
     public void getData() throws ClientProtocolException, IOException{
         try (
                 CloseableHttpClient httpClient = HttpClients.createDefault()
                 ) {
+            // TODO Вынести параметры OAuth
             HttpGet httpGet = new HttpGet("https://weather-ydn-yql.media.yahoo.com/forecastrss" +
                     "?location=penza,ru" +
                     "&format=json" +
@@ -44,8 +55,10 @@ public class YahooDataRequest implements DataRequest {
                     throw new ClientProtocolException("Unexpected response status : " + status);
                 }
             };
+            // Получение JSON
             String responseBody = httpClient.execute(httpGet, responseHandler);
             LOG.info(responseBody);
+            sendMessage.sendMessage(responseBody);
         }
     }
 }
