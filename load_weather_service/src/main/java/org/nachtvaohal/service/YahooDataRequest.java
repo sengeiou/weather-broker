@@ -1,4 +1,4 @@
-package service;
+package org.nachtvaohal.service;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -9,8 +9,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -36,6 +34,7 @@ public class YahooDataRequest implements DataRequest {
                 ) {
             // TODO Вынести параметры OAuth
             HttpGet httpGet = new HttpGet("https://weather-ydn-yql.media.yahoo.com/forecastrss" +
+                    // TODO Что то меняется, если изменить город.
                     "?location=penza,ru" +
                     "&format=json" +
                     "&oauth_consumer_key=dj0yJmk9M2h5NVZTcnAyTXU3JmQ9WVdrOWR6ZFNUVEppTXpJbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PWEz" +

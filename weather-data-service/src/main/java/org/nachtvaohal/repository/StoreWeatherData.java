@@ -1,4 +1,4 @@
-package repository;
+package org.nachtvaohal.repository;
 
 import java.util.logging.Logger;
 

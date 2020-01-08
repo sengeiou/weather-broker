@@ -1,4 +1,4 @@
-package service;
+package org.nachtvaohal.service;
 
 /**
  * Интерфейс получения данных с удаленного сервиса

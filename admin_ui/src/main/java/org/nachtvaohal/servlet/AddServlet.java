@@ -1,6 +1,6 @@
-package servlet;
+package org.nachtvaohal.servlet;
 
-import service.SendMessage;
+import org.nachtvaohal.service.SendMessage;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;

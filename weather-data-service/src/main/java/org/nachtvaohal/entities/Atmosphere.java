@@ -1,4 +1,4 @@
-package entities;
+package org.nachtvaohal.entities;
 
 public class Atmosphere {
     private int humidity;

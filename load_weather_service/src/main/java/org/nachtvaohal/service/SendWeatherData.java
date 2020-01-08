@@ -1,7 +1,6 @@
-package service;
+package org.nachtvaohal.service;
 
 import javax.annotation.Resource;
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.jms.JMSContext;
@@ -20,7 +19,7 @@ public class SendWeatherData implements SendMessage {
     private JMSContext context;
 
     public String sendMessage(String cityName) {
-        LOG.info("Sending message to weather-data-service module: " + cityName);
+        LOG.info("Sending message to weather-data-org.nachtvaohal.service module: " + cityName);
         context.createProducer().send(queue, cityName);
         return "QUEUE NAME:" + queueName() + ";CONTEXT IS NOT NULL:" + (context != null);
     }

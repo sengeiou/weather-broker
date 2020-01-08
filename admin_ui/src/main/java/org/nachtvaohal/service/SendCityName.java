@@ -1,4 +1,4 @@
-package service;
+package org.nachtvaohal.service;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
