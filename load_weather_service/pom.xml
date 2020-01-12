@@ -16,7 +16,7 @@
     <!--  здесь должен быть jar -->
     <packaging>war</packaging>
 
-    <name>Simple org.nachtvaohal.service for receiving forecasts from yahoo</name>
+    <name>Simple service for receiving forecasts from yahoo</name>
 
     <dependencies>
         <dependency>

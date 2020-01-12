@@ -1,4 +1,4 @@
-package org.nachtvaohal.entities;
+package org.nachtvaohal.view.unused;
 
 public class Wind {
     private int chill;

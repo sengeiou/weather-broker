@@ -18,17 +18,8 @@ public class SendWeatherData implements SendMessage {
     @Inject
     private JMSContext context;
 
-    public String sendMessage(String cityName) {
-        LOG.info("Sending message to weather-data-org.nachtvaohal.service module: " + cityName);
+    public void sendMessage(String cityName) {
+        LOG.info("Sending message to weather-data-service module: ");
         context.createProducer().send(queue, cityName);
-        return "QUEUE NAME:" + queueName() + ";CONTEXT IS NOT NULL:" + (context != null);
-    }
-
-    private String queueName() {
-        try {
-            return queue.getQueueName();
-        } catch (JMSException e) {
-            return "JMSException" + e.getErrorCode();
-        }
     }
 }

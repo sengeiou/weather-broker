@@ -1,8 +1,8 @@
-package org.nachtvaohal.entities;
+package org.nachtvaohal.view;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Forecast {
+public class ForecastView {
     @JsonProperty("day")
     private String day;
     @JsonProperty("date")
@@ -16,7 +16,7 @@ public class Forecast {
     @JsonProperty("code")
     private int code;
 
-    public Forecast() {
+    public ForecastView() {
     }
 
     @Override

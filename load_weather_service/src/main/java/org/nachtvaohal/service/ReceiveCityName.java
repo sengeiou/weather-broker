@@ -28,9 +28,10 @@ public class ReceiveCityName implements MessageListener {
 
     public void onMessage(Message rcvMessage) {
         try {
-            LOG.info("Message received: " + rcvMessage.getBody(String.class));
+            String cityName = rcvMessage.getBody(String.class);
+            LOG.info("Message received: " + cityName);
             LOG.info(String.valueOf(dataRequest != null));
-            dataRequest.getData();
+            dataRequest.getWeatherData(cityName);
         } catch (JMSException ex) {
             LOG.log(Level.SEVERE, ex.getMessage(), ex);
         } catch (Exception ex) {

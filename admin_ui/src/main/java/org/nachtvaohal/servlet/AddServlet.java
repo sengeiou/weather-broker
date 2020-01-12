@@ -21,18 +21,14 @@ public class AddServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LOG.info("IN GET");
         request.getRequestDispatcher("index.jsp").forward(request, response);
         //Получение параметра из поля на странице запроса.
         String city = request.getParameter("city");
         try {
-            String result = sendMessage.sendMessage(city);
-            response.getWriter().println("OK. SERVICE IS NULL:" + (sendMessage == null) + "; SERVICE RESULT:" + result);
-            LOG.info("dick");
+            sendMessage.sendMessage(city);
 
         // TODO Какое то другое исключение должно быть наверно
         } catch (RuntimeException e) {
-            response.getWriter().println("NOT OK");
             LOG.info("Field \"City\" is empty");
         }
     }

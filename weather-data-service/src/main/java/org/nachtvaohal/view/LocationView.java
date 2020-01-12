@@ -1,14 +1,9 @@
-package org.nachtvaohal.entities;
+package org.nachtvaohal.view;
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-
-import java.util.Map;
 
 //@JsonRootName(value = "location")
-public class Location {
+public class LocationView {
     @JsonProperty("woeid")
     private int woeid;
     @JsonProperty("city")
@@ -26,7 +21,7 @@ public class Location {
     @JsonProperty("timezone_id")
     private String timezoneId;
 
-    public Location() {
+    public LocationView() {
     }
 
     public int getWoeid() {

@@ -1,5 +1,6 @@
 package org.nachtvaohal.service;
 
 public interface SendMessage {
-    String sendMessage(String txt);
+    // TODO этот метод надо как-то логично назвать
+    void sendMessage(String txt);
 }

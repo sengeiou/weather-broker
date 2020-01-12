@@ -5,5 +5,5 @@ package org.nachtvaohal.service;
  */
 public interface DataRequest {
     // TODO: Эти исключения надо будет убрать отсюда наверно.
-    void getData() throws Exception;
+    void getWeatherData(String cityName) throws Exception;
 }

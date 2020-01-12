@@ -2,15 +2,15 @@ package org.nachtvaohal.service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.nachtvaohal.entities.BeanWithCreator;
-import org.nachtvaohal.entities.Location;
-import org.nachtvaohal.entities.WeatherData;
+import org.nachtvaohal.dao.WeatherDataDAO;
+import org.nachtvaohal.model.WeatherData;
+import org.nachtvaohal.view.WeatherDataView;
 
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
+import javax.inject.Inject;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -23,14 +23,14 @@ public class ReceiveWeatherData implements MessageListener {
     private static final Logger LOG = Logger.getLogger(ReceiveWeatherData.class.getName());
 
     // TODO что то не то с внедрением
-    //private StoreData storeData;
+    private WeatherDataDAO dao;
 
     public ReceiveWeatherData(){}
 
-//    @Inject
-//    public ReceiveWeatherData(StoreData dataRequest) {
-//        this.storeData = dataRequest;
-//    }
+    @Inject
+    public ReceiveWeatherData(WeatherDataDAO dao) {
+        this.dao = dao;
+    }
 
     public void onMessage(Message rcvMessage) {
         try {
@@ -40,9 +40,11 @@ public class ReceiveWeatherData implements MessageListener {
             String json = rcvMessage.getBody(String.class);
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            WeatherData data = objectMapper.readValue(json, WeatherData.class);
-            LOG.info(data.getLocation().toString());
-            LOG.info(data.getForecasts().get(0).toString());
+            WeatherDataView data = objectMapper.readValue(json, WeatherDataView.class);
+            LOG.info(data.getLocationView().toString());
+            LOG.info(data.getForecastViews().get(0).toString());
+            // Данные получены и отсюда отправляются в БД.
+            dao.save(new WeatherData(data.getLocationView().getCity()));
         } catch (JMSException ex) {
             LOG.log(Level.SEVERE, ex.getMessage(), ex);
         } catch (Exception ex) {
