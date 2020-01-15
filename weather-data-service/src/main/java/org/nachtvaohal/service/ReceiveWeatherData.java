@@ -2,9 +2,9 @@ package org.nachtvaohal.service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.nachtvaohal.dao.WeatherDataDAO;
-import org.nachtvaohal.model.WeatherData;
-import org.nachtvaohal.view.WeatherDataView;
+import org.nachtvaohal.dao.StoreData;
+import org.nachtvaohal.model.WeatherDataModel;
+import org.nachtvaohal.view.WeatherData;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,28 +23,26 @@ public class ReceiveWeatherData implements MessageListener {
     private static final Logger LOG = Logger.getLogger(ReceiveWeatherData.class.getName());
 
     // TODO что то не то с внедрением
-    private WeatherDataDAO dao;
+    private StoreData storeData;
+
 
     public ReceiveWeatherData(){}
 
     @Inject
-    public ReceiveWeatherData(WeatherDataDAO dao) {
-        this.dao = dao;
+    public ReceiveWeatherData(StoreData storeData) {
+        this.storeData = storeData;
     }
 
     public void onMessage(Message rcvMessage) {
         try {
             LOG.info("Message received.");
-            //LOG.info(String.valueOf(storeData != null));
-            //storeData.saveForecastInDatabase();
             String json = rcvMessage.getBody(String.class);
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            WeatherDataView data = objectMapper.readValue(json, WeatherDataView.class);
-            LOG.info(data.getLocationView().toString());
-            LOG.info(data.getForecastViews().get(0).toString());
+            WeatherData data = objectMapper.readValue(json, WeatherData.class);
+
             // Данные получены и отсюда отправляются в БД.
-            dao.save(new WeatherData(data.getLocationView().getCity()));
+            storeData.save(new WeatherDataModel("penza"));
         } catch (JMSException ex) {
             LOG.log(Level.SEVERE, ex.getMessage(), ex);
         } catch (Exception ex) {

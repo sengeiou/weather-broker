@@ -3,7 +3,7 @@ package org.nachtvaohal.view;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 //@JsonRootName(value = "location")
-public class LocationView {
+public class Location {
     @JsonProperty("woeid")
     private int woeid;
     @JsonProperty("city")
@@ -21,7 +21,7 @@ public class LocationView {
     @JsonProperty("timezone_id")
     private String timezoneId;
 
-    public LocationView() {
+    public Location() {
     }
 
     public int getWoeid() {

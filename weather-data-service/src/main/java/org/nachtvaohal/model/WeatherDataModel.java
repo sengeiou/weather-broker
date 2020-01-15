@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "weather_data")
-public class WeatherData {
+public class WeatherDataModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,10 +13,10 @@ public class WeatherData {
     @Column(name = "city")
     private String city;
 
-    public WeatherData() {
+    public WeatherDataModel() {
     }
 
-    public WeatherData(String city) {
+    public WeatherDataModel(String city) {
         this.city = city;
     }
 

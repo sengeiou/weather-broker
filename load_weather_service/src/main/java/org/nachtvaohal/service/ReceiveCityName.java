@@ -1,5 +1,7 @@
 package org.nachtvaohal.service;
 
+import org.nachtvaohal.view.City;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;
@@ -18,20 +20,29 @@ public class ReceiveCityName implements MessageListener {
 
     // TODO что то не то с внедрением
     private DataRequest dataRequest;
+    private SendMessage sendMessage;
+    private MessageService service;
 
     public ReceiveCityName(){}
 
-    @Inject
-    public ReceiveCityName(DataRequest dataRequest) {
+    @Inject                 // Что вот тут не нравится?
+    public ReceiveCityName(DataRequest dataRequest, SendMessage sendMessage, MessageService service) {
         this.dataRequest = dataRequest;
+        this.sendMessage = sendMessage;
+        this.service = service;
     }
 
     public void onMessage(Message rcvMessage) {
         try {
-            String cityName = rcvMessage.getBody(String.class);
-            LOG.info("Message received: " + cityName);
-            LOG.info(String.valueOf(dataRequest != null));
-            dataRequest.getWeatherData(cityName);
+            String messageBody = rcvMessage.getBody(String.class);
+            City city = service.convertToModel(messageBody, City.class);
+            LOG.info(city.getName());
+            sendMessage.sendMessage(dataRequest.getWeatherData(city.getName()));
+
+
+
+
+
         } catch (JMSException ex) {
             LOG.log(Level.SEVERE, ex.getMessage(), ex);
         } catch (Exception ex) {
