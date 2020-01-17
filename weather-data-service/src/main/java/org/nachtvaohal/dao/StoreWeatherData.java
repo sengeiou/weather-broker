@@ -17,7 +17,6 @@ public class StoreWeatherData implements StoreData {
     @Override
     public void save(WeatherDataModel weatherDataModel) {
         em.persist(weatherDataModel);
-        LOG.info(String.valueOf(em != null));
         LOG.info("successfully stored");
     }
 }

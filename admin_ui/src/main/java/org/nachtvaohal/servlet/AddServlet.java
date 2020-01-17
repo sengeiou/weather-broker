@@ -23,6 +23,7 @@ public class AddServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("index.jsp").forward(request, response);
         //Получение параметра из поля на странице запроса.
+        // todo проверка на латиницу, т.к. кириллицу yahoo не воспринимает
         String city = request.getParameter("city");
         try {
             sendMessage.sendMessage(city);

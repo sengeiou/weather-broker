@@ -47,6 +47,7 @@ public class YahooDataRequest implements DataRequest {
                 // TODO СКОНФИГУРИРОВАТЬ КАК ОТДЕЛЬНЫЙ СИНГЛТОН БИН
                 CloseableHttpClient httpClient = HttpClients.createDefault()
         ) {
+            // TODO если в названии города есть пробел - запрос не срабатывает
             HttpGet httpGet = new HttpGet(url + "?location=" + cityName + "&format=json");
             httpGet.addHeader("Authorization", authorizationLine);
             httpGet.addHeader("X-Yahoo-App-Id", appId);
