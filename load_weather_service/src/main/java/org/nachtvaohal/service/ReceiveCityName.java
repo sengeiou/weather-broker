@@ -39,10 +39,6 @@ public class ReceiveCityName implements MessageListener {
             LOG.info(city.getName());
             sendMessage.sendMessage(dataRequest.getWeatherData(city.getName()));
 
-
-
-
-
         } catch (JMSException ex) {
             LOG.log(Level.SEVERE, ex.getMessage(), ex);
         } catch (Exception ex) {

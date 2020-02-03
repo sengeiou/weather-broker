@@ -24,8 +24,8 @@ public class ReceiveWeatherData implements MessageListener {
     // TODO что то не то с внедрением
     private DataTransformer dataTransformer;
 
-
-    public ReceiveWeatherData(){}
+    public ReceiveWeatherData() {
+    }
 
     @Inject
     public ReceiveWeatherData(DataTransformer dataTransformer) {

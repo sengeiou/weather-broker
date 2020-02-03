@@ -14,13 +14,11 @@ import java.util.logging.Logger;
 public class SendCityName implements SendMessage {
     private final Logger LOG = Logger.getLogger(SendCityName.class.getName());
 
+    // todo почему здесь два параметра инжектятся через конструктор, а один в поле?
     @Resource(mappedName = "java:/jms/queue/city")
     private Queue queue;
     private JMSContext context;
     private MessageService service;
-
-    public SendCityName() {
-    }
 
     @Inject
     public SendCityName(JMSContext context, MessageService service) {

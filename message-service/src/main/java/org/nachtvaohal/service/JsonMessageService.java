@@ -41,6 +41,7 @@ public class JsonMessageService implements MessageService {
         if (messageModel == null || !messageModel.getClass().isAssignableFrom(messageModelClass)) {
             throw new RuntimeException ("SOME UNBELIEVEABLE TEXT************************************");
         }
+        // todo если @SuppressWarnings("unchecked") поместить здесь, то ругается
         return (T)messageModel;
     }
 }

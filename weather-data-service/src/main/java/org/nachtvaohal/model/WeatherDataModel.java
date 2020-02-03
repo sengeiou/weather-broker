@@ -2,8 +2,8 @@ package org.nachtvaohal.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
+// todo сделать ограничения и @Version
 @Entity
 @Table(name = "weather_data")
 public class WeatherDataModel {

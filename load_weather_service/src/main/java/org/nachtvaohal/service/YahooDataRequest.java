@@ -2,15 +2,16 @@ package org.nachtvaohal.service;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.nachtvaohal.CloseableHttpClientFactory;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import java.io.UnsupportedEncodingException;
@@ -20,6 +21,9 @@ import java.util.logging.Logger;
 
 @RequestScoped
 public class YahooDataRequest implements DataRequest {
+
+    @Inject
+    private HttpClient httpClient;
 
     // TODO В будущем можно добавить ввод / изменение этих параметров через админскую консоль
     private final String appId = "w7RM2b32";
@@ -43,30 +47,26 @@ public class YahooDataRequest implements DataRequest {
         String signature = generateSignatureString(parametersList);
         String authorizationLine = generateAuthorizationLine(signature);
 
-        try (
-                // TODO СКОНФИГУРИРОВАТЬ КАК ОТДЕЛЬНЫЙ СИНГЛТОН БИН
-                CloseableHttpClient httpClient = HttpClients.createDefault()
-        ) {
-            // TODO если в названии города есть пробел - запрос не срабатывает
-            HttpGet httpGet = new HttpGet(url + "?location=" + cityName + "&format=json");
-            httpGet.addHeader("Authorization", authorizationLine);
-            httpGet.addHeader("X-Yahoo-App-Id", appId);
-            httpGet.addHeader("Content-Type", "application/json");
-            LOG.info("Executing request " + cityName);
+        // TODO если в названии города есть пробел - запрос не срабатывает
+        HttpGet httpGet = new HttpGet(url + "?location=" + cityName + "&format=json");
+        httpGet.addHeader("Authorization", authorizationLine);
+        httpGet.addHeader("X-Yahoo-App-Id", appId);
+        httpGet.addHeader("Content-Type", "application/json");
+        LOG.info("Executing request " + cityName);
 
-            ResponseHandler<String> responseHandler = response -> {
-                LOG.info(response.getStatusLine().getReasonPhrase());
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    throw new ClientProtocolException("Unexpected response status : " + status);
-                }
-            };
-            // Получение JSON
-            return httpClient.execute(httpGet, responseHandler);
-        }
+        // todo ResponseHandler необязательно создавать новый каждый раз
+        ResponseHandler<String> responseHandler = response -> {
+            LOG.info(response.getStatusLine().getReasonPhrase());
+            int status = response.getStatusLine().getStatusCode();
+            if (status >= 200 && status < 300) {
+                HttpEntity entity = response.getEntity();
+                return entity != null ? EntityUtils.toString(entity) : null;
+            } else {
+                throw new ClientProtocolException("Unexpected response status : " + status);
+            }
+        };
+        // Получение JSON
+        return httpClient.execute(httpGet, responseHandler);
     }
 
     private String generateNonce(){
@@ -123,6 +123,7 @@ public class YahooDataRequest implements DataRequest {
             signature = encoder.encodeToString(rawHMAC);
         } catch (Exception e) {
             System.err.println("Unable to append signature");
+            // todo точно нужен system exit в случае исключения?
             System.exit(0);
         }
         return signature;
