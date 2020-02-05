@@ -22,7 +22,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring.version>5.2.2.RELEASE</spring.version>
         <junit.ver>4.12</junit.ver>
-        <javaee-web.version>6.0</javaee-web.version>
+        <javaee-web.version>7.0</javaee-web.version>
     </properties>
 
     <modules>
@@ -30,6 +30,7 @@
         <module>load_weather_service</module>
         <module>weather-data-service</module>
         <module>message-service</module>
+        <module>weather-rmi</module>
     </modules>
 
     <!--  При переопределении scope лучше писать комментарий, для чего это сделано  -->
