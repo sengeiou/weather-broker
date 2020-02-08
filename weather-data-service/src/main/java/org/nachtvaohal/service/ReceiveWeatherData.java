@@ -3,7 +3,7 @@ package org.nachtvaohal.service;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.nachtvaohal.dao.DataTransformer;
-import org.nachtvaohal.view.WeatherData;
+import org.nachtvaohal.view.WeatherDataView;
 
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
@@ -21,9 +21,8 @@ import java.util.logging.Logger;
 public class ReceiveWeatherData implements MessageListener {
     private static final Logger LOG = Logger.getLogger(ReceiveWeatherData.class.getName());
 
-    // TODO что то не то с внедрением
     private DataTransformer dataTransformer;
-
+    // TODO не работает без конструктора по умолчанию
     public ReceiveWeatherData() {
     }
 
@@ -38,7 +37,7 @@ public class ReceiveWeatherData implements MessageListener {
             String json = rcvMessage.getBody(String.class);
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            WeatherData data = objectMapper.readValue(json, WeatherData.class);
+            WeatherDataView data = objectMapper.readValue(json, WeatherDataView.class);
 
             // Данные получены и отсюда отправляются в БД.
             dataTransformer.transformToEntity(data);

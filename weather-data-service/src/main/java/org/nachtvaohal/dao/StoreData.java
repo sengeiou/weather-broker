@@ -6,5 +6,5 @@ import java.time.LocalDate;
 
 public interface StoreData{
     void save(WeatherDataModel weatherDataModel);
-    WeatherDataModel get(LocalDate localDate, String cityName);
+    WeatherDataModel get(String cityName, LocalDate localDate);
 }

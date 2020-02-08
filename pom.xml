@@ -36,12 +36,6 @@
     <!--  При переопределении scope лучше писать комментарий, для чего это сделано  -->
     <dependencyManagement>
         <dependencies>
-<!--            <dependency>-->
-<!--                <groupId>${groupId}.${artifactId}</groupId>-->
-<!--                <artifactId>admin_ui</artifactId>-->
-<!--                <version>${weather-broker.version}</version>-->
-<!--                <scope>compile</scope>-->
-<!--            </dependency>-->
 
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -74,7 +68,7 @@
                 <version>2.0.1</version>
                 <scope>provided</scope>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.jboss.spec.javax.jms/jboss-jms-api_2.0_spec -->
+
             <dependency>
                 <groupId>org.jboss.spec.javax.jms</groupId>
                 <artifactId>jboss-jms-api_2.0_spec</artifactId>
@@ -94,7 +88,7 @@
                 <version>7.0</version>
                 <scope>provided</scope>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>

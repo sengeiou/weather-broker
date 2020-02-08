@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Weather Forecast</title>
+    <title>Weather forecast</title>
+
+    <!-- ссылка на файл стиля -->
+<!--    <link rel="stylesheet" th:href="@{/css/demo.css}"/>-->
 </head>
+
 <body>
 
+    <p th:text="'City is ' + ${city}"/>
+    <p th:text="'Date ' + ${date}"/>
+    <p th:text="'Low temperature ' + ${low}"/>
+    <p th:text="'High temperature ' + ${high}"/>
+    <p th:text="'Description ' + ${text}"/>
+
+    <!-- redirect -->
+    <!-- не уверен, что так правильно делать-->
+    <a th:href="@{/}">Back to start page</a>
 </body>
+
 </html>

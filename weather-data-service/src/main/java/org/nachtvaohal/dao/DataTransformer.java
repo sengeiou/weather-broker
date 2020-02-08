@@ -1,7 +1,7 @@
 package org.nachtvaohal.dao;
 
-import org.nachtvaohal.view.WeatherData;
+import org.nachtvaohal.view.WeatherDataView;
 
 public interface DataTransformer {
-    void transformToEntity (WeatherData weatherData);
+    void transformToEntity (WeatherDataView weatherData);
 }

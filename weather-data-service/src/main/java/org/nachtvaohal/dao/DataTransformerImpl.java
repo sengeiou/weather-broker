@@ -1,7 +1,7 @@
 package org.nachtvaohal.dao;
 
 import org.nachtvaohal.model.WeatherDataModel;
-import org.nachtvaohal.view.WeatherData;
+import org.nachtvaohal.view.WeatherDataView;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -26,17 +26,17 @@ public class DataTransformerImpl implements DataTransformer {
         this.storeData = storeData;
     }
     @Override
-    public void transformToEntity(WeatherData weatherData) {
-        int forecastDaysAmount = weatherData.getForecasts().size();
+    public void transformToEntity(WeatherDataView weatherDataView) {
+        int forecastDaysAmount = weatherDataView.getForecasts().size();
         List<WeatherDataModel> weatherDataModelList = new ArrayList<>();
         for (int i = 0; i < forecastDaysAmount; i ++) {
             WeatherDataModel tempWeathDataModel = new WeatherDataModel(
-                    weatherData.getLocation().getCity(),
-                    transformStringToLocalDate(weatherData.getForecasts().get(i).getDate()),
-                    convertFahrenheitToCelsius(weatherData.getForecasts().get(i).getLow()),
-                    convertFahrenheitToCelsius(weatherData.getForecasts().get(i).getHigh()),
-                    weatherData.getForecasts().get(i).getText());
-            tempWeathDataModel.setDate(transformStringToLocalDate(weatherData.getForecasts().get(i).getDate()));
+                    weatherDataView.getLocation().getCity(),
+                    transformStringToLocalDate(weatherDataView.getForecasts().get(i).getDate()),
+                    convertFahrenheitToCelsius(weatherDataView.getForecasts().get(i).getLow()),
+                    convertFahrenheitToCelsius(weatherDataView.getForecasts().get(i).getHigh()),
+                    weatherDataView.getForecasts().get(i).getText());
+            tempWeathDataModel.setDate(transformStringToLocalDate(weatherDataView.getForecasts().get(i).getDate()));
             weatherDataModelList.add(tempWeathDataModel);
         }
         for (WeatherDataModel wdm : weatherDataModelList) {
@@ -46,7 +46,7 @@ public class DataTransformerImpl implements DataTransformer {
 
     private static LocalDate transformStringToLocalDate(String stringDate) {
         LOG.info("transforming :" + stringDate);
-        long epochSeconds = Long.valueOf(stringDate);
+        long epochSeconds = Long.parseLong(stringDate);
         LocalDate date = Instant.ofEpochSecond(epochSeconds)
                                 .atZone(ZoneId.systemDefault())
                                 .toLocalDate();

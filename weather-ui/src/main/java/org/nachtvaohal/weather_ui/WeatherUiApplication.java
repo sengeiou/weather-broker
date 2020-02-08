@@ -1,5 +1,6 @@
 package org.nachtvaohal.weather_ui;
 
+import com.caucho.hessian.client.HessianProxyFactory;
 import org.nachtvaohal.WeatherDataRemoteReceivingService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,12 +17,10 @@ public class WeatherUiApplication {
 
     // todo конечно же это надо вынести с отдельный класс
     @Bean
-    public HttpInvokerProxyFactoryBean invoker() {
-        HttpInvokerProxyFactoryBean invoker = new HttpInvokerProxyFactoryBean();
-        invoker.setServiceUrl("http://localhost:8080/forecast");
+    public HessianProxyFactoryBean invoker() {
+        HessianProxyFactoryBean invoker = new HessianProxyFactoryBean();
+        invoker.setServiceUrl("http://localhost:8080/weather_data_service/forecast");
         invoker.setServiceInterface(WeatherDataRemoteReceivingService.class);
         return invoker;
     }
-
-
 }

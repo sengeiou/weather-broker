@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class WeatherData implements MessageModel {
+public class WeatherDataView implements MessageModel {
     @JsonProperty("location")
     private Location location;
     @JsonProperty("forecasts")
     private List<Forecast> forecasts;
 
-    public WeatherData() {
+    public WeatherDataView() {
     }
 
     public Location getLocation() {

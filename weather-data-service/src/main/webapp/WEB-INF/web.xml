@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+    <servlet>
+        <servlet-name>forecast</servlet-name>
+        <servlet-class>com.caucho.hessian.server.HessianServlet</servlet-class>
+        <init-param>
+            <param-name>home-class</param-name>
+            <param-value>org.nachtvaohal.remote.WeatherDataRemoteReceivingServiceImpl</param-value>
+        </init-param>
+        <init-param>
+            <param-name>home-api</param-name>
+            <param-value>org.nachtvaohal.WeatherDataRemoteReceivingService</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <url-pattern>/forecast</url-pattern>
+        <servlet-name>forecast</servlet-name>
+    </servlet-mapping>
+</web-app>
