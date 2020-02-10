@@ -14,13 +14,4 @@ public class WeatherUiApplication {
     public static void main(String[] args) {
         SpringApplication.run(WeatherUiApplication.class, args);
     }
-
-    // todo конечно же это надо вынести с отдельный класс
-    @Bean
-    public HessianProxyFactoryBean invoker() {
-        HessianProxyFactoryBean invoker = new HessianProxyFactoryBean();
-        invoker.setServiceUrl("http://localhost:8080/weather_data_service/forecast");
-        invoker.setServiceInterface(WeatherDataRemoteReceivingService.class);
-        return invoker;
-    }
 }

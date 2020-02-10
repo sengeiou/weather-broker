@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @WebServlet("/add")
 public class AddServlet extends HttpServlet {
@@ -25,6 +27,7 @@ public class AddServlet extends HttpServlet {
         //Получение параметра из поля на странице запроса.
         // todo проверка на латиницу, т.к. кириллицу yahoo не воспринимает
         String city = request.getParameter("city");
+
         try {
             sendMessage.sendMessage(city);
 
@@ -33,4 +36,16 @@ public class AddServlet extends HttpServlet {
             LOG.info("Field \"City\" is empty");
         }
     }
+
+    private boolean validateString(String input) {
+        return true;
+    }
+
+    private String replaceUrlSpaces(String input) {
+        String regex = "\\s";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.replaceAll("%20");
+    }
+
 }

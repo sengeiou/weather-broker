@@ -27,13 +27,16 @@ public class WeatherDataController {
     public String receiveWeather(@RequestParam("city") String city,
                                  @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
                                  Model model) {
-        WeatherData weatherData = service.receiveWeather(city, date);
+        // Потому что hessian бросает SOE при сериализации/десериализации LocalDate
+        String stringDate = date.toString();
+        WeatherData weatherData = service.receiveWeather(city, stringDate);
         model.addAttribute("city", weatherData.getCity());
         model.addAttribute("date", weatherData.getDate());
         model.addAttribute("low", weatherData.getLow());
         model.addAttribute("high", weatherData.getHigh());
         model.addAttribute("text", weatherData.getText());
-        LOG.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + weatherData.getCity());
         return "weather";
     }
+
+
 }

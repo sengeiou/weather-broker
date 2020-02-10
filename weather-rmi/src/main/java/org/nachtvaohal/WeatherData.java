@@ -8,12 +8,12 @@ import java.time.LocalDate;
  */
 public class WeatherData implements Serializable {
     private String city;
-    private LocalDate date;
+    private String date;
     private int low;
     private int high;
     private String text;
 
-    public WeatherData(String city, LocalDate date, int low, int high, String text) {
+    public WeatherData(String city, String date, int low, int high, String text) {
         this.city = city;
         this.date = date;
         this.low = low;
@@ -29,11 +29,11 @@ public class WeatherData implements Serializable {
         this.city = city;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

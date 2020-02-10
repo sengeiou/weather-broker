@@ -6,7 +6,7 @@
         <description>JpaForBeginners</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>java:/WeatherBrokerData</jta-data-source>
-        <class>org.nachtvaohal.view.WeatherData</class>
+        <class>org.nachtvaohal.view.WeatherDataView</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>

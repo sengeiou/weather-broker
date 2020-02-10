@@ -7,6 +7,7 @@
     <groupId>org.nachtvaohal</groupId>
     <artifactId>weather-broker</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <packaging>pom</packaging>
     <!--  «Корпоративный» POM
     Здесь описаны общие правила для всех проектов:

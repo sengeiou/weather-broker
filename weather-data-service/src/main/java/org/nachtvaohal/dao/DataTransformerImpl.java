@@ -47,8 +47,9 @@ public class DataTransformerImpl implements DataTransformer {
     private static LocalDate transformStringToLocalDate(String stringDate) {
         LOG.info("transforming :" + stringDate);
         long epochSeconds = Long.parseLong(stringDate);
+        // todo дата трансформируется на сутки раньше
         LocalDate date = Instant.ofEpochSecond(epochSeconds)
-                                .atZone(ZoneId.systemDefault())
+                                .atZone(ZoneId.of("GMT+3"))
                                 .toLocalDate();
         return date;
     }
