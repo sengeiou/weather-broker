@@ -5,10 +5,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.nachtvaohal.CloseableHttpClientFactory;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -16,7 +13,12 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+import java.util.Base64;
+import java.util.Collections;
 import java.util.logging.Logger;
 
 @RequestScoped
@@ -38,7 +40,6 @@ public class YahooDataRequest implements DataRequest {
     public YahooDataRequest() {
     }
 
-    // TODO ДОЛЖЕН БЫТЬ НЕ VOID
     @Override
     public String getWeatherData(String cityName) throws Exception {
 

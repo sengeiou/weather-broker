@@ -1,14 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Погодный брокер</title>
-</head>
-<body>
-<h1>Погодный брокер</h1>
-<h2>Введите название города</h2>
-<form action="add" method="get" modelAttribute="city">
-    <input type="text" name="city">
-    <input type="submit">
-</form>
-</body>
-</html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
+<jsp:forward page="add"></jsp:forward>
